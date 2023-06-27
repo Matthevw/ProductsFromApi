@@ -43,7 +43,6 @@ class AddAllProducts
 
     public function addProducts()
     {
-        // $product = $this->productModel->create();
 
         $url = "https://fakestoreapi.com/products";
 
@@ -52,12 +51,10 @@ class AddAllProducts
         $result = $this->curl->getBody();
 
         $products = json_decode($result, true);
-        // var_dump($products);
 
         foreach ($products as $value) {
             $product = $this->productModel->create();
 
-            // $product->setSku(substr($value['title'], 0, 30))
             $product->setSku((string)$value['id'])
             ->setName($value['title'])
             ->setPrice($value['price'])
@@ -73,5 +70,4 @@ class AddAllProducts
         $collection = $this->productCollection->create()->getData();
         print(print_r($collection,true)); die;
     }
-
 }
